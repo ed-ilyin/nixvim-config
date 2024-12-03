@@ -72,13 +72,14 @@
     bufferline.enable = true;
     copilot-lua = {
       enable = true;
-      suggestion.enabled = false;
-      panel.enabled = false;
+      # suggestion.enabled = false;
+      # panel.enabled = false;
     };
     lazygit.enable = true;
     lsp = {
       enable = true;
       servers = {
+        bicep.enable = true;
 	dotls.enable = true;
 	fsautocomplete.enable = true;
 	nixd.enable = true;
@@ -94,6 +95,7 @@
 	  };
 	};
 	nushell.enable = true;
+	omnisharp.enable = true;
       };
     };
     lualine.enable = true;
