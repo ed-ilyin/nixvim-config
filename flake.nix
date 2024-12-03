@@ -8,31 +8,37 @@
     nixvim = {
       url = "github:nix-community/nixvim/nixos-24.11";
       inputs = {
-	nixpkgs.follows = "nixpkgs";
-	flake-parts.follows = "flake-parts";
-	devshell.follows = "";
-	flake-compat.follows = "";
-	git-hooks.follows = "";
-	home-manager.follows = "";
-	nix-darwin.follows = "";
-	treefmt-nix.follows = "";
+        nixpkgs.follows = "nixpkgs";
+        flake-parts.follows = "flake-parts";
+        devshell.follows = "";
+        flake-compat.follows = "";
+        git-hooks.follows = "";
+        home-manager.follows = "";
+        nix-darwin.follows = "";
+        treefmt-nix.follows = "";
       };
     };
   };
 
-  outputs =
-    { nixvim, flake-parts, ... }@inputs:
+  outputs = { self, nixpkgs, nixvim, flake-parts, ... }@inputs:
     flake-parts.lib.mkFlake { inherit inputs; } {
-      systems = [
-        "x86_64-linux"
-        "aarch64-linux"
-        "x86_64-darwin"
-        "aarch64-darwin"
-      ];
+      systems = [ "x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin" ];
 
       perSystem =
-        { pkgs, system, ... }:
+        { system, ... }:
         let
+          pkgs = import nixpkgs {
+	    inherit system;
+            config = {
+	      nix.nixPath = [ "nixpkgs=${nixpkgs}" ];
+              permittedInsecurePackages = [
+                "dotnet-core-combined"
+                "dotnet-sdk-6.0.428"
+                "dotnet-sdk-7.0.410"
+                "dotnet-sdk-wrapped-6.0.428"
+              ];
+            };
+          };
           nixvimLib = nixvim.lib.${system};
           nixvim' = nixvim.legacyPackages.${system};
           nixvimModule = {
@@ -40,6 +46,8 @@
             module = import ./config; # import the module directly
             # You can use `extraSpecialArgs` to pass additional arguments to your module files
             extraSpecialArgs = {
+	      inherit self;
+	      inherit system;
               # inherit (inputs) foo;
             };
           };
