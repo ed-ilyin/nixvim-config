@@ -1,4 +1,9 @@
-{ self, pkgs, system, ... }:
+{
+  self,
+  pkgs,
+  system,
+  ...
+}:
 {
   clipboard.register = "unnamedplus";
   colorschemes.catppuccin.enable = true;
@@ -13,19 +18,19 @@
   keymaps =
     let
       leader = key: action: desc: {
-	mode = "n";
-	key = "<leader>${key}";
-	action = "<cmd>${action}<CR>";
-	options = {
-	  silent = true;
-	  desc = desc;
-	};
+        mode = "n";
+        key = "<leader>${key}";
+        action = "<cmd>${action}<CR>";
+        options = {
+          silent = true;
+          desc = desc;
+        };
       };
     in
     [
       {
-	key = ";";
-	action = ":";
+        key = ";";
+        action = ":";
       }
       (leader "?" "WhichKey" "Show Keymaps")
       (leader "bb" "Telescope buffers" "List Buffers")
@@ -54,19 +59,25 @@
     blink-cmp = {
       enable = true;
       settings = {
-	accept.auto_brackets.enabled = true;
-	highlight.use_nvim_cmp_as_default = true;
-	keymap = {
-	  preset = "enter";
-	  "<S-l>" = [ "select_and_accept" ];
-	  "<S-j>" = [ "select_next" "fallback" ];
-	  "<S-h>" = [ "hide" ];
-	  "<S-k>" = [ "select_prev" "fallback" ];
-	};
-	nerd_font_variant = "mono";
-	trigger.signature_help.enabled = true;
-	windows.documentation.auto_show = true;
-	windows.documentation.treesitter_highlighting = true;
+        accept.auto_brackets.enabled = true;
+        highlight.use_nvim_cmp_as_default = true;
+        keymap = {
+          preset = "enter";
+          "<S-l>" = [ "select_and_accept" ];
+          "<S-j>" = [
+            "select_next"
+            "fallback"
+          ];
+          "<S-h>" = [ "hide" ];
+          "<S-k>" = [
+            "select_prev"
+            "fallback"
+          ];
+        };
+        nerd_font_variant = "mono";
+        trigger.signature_help.enabled = true;
+        windows.documentation.auto_show = true;
+        windows.documentation.treesitter_highlighting = true;
       };
     };
     bufferline.enable = true;
@@ -79,23 +90,23 @@
     lsp = {
       enable = true;
       servers = {
-        bicep.enable = true;
-	dotls.enable = true;
-	fsautocomplete.enable = true;
-	nixd.enable = true;
-	nixd.settings = {
-	  formatting.command = [ "nixfmt" ];
-	  nixpkgs.expr = "import (builtins.getFlake \"/Users/ed/dev/nix/main-flake\").inputs.nixpkgs { }";
-	  # nixpkgs.expr = "import <nixpkgs> { }";
-	  options = {
-	    nixos.expr = ''(builtins.getFlake "/Users/ed/dev/nix/main-flake").outputs.nixosConfigurations.nixos.options'';
-	    nix-darwin.expr = ''(builtins.getFlake "/Users/ed/dev/nix/main-flake").outputs.darwinConfigurations.Ed-MBP16.options'';
-	    home-manager.expr = ''(builtins.getFlake "/Users/ed/dev/nix/main-flake").outputs.homeConfigurations.ed.options'';
-	    nixvim.expr = ''(builtins.getFlake "${self}").packages.${system}.neovimNixvim.options'';
-	  };
-	};
-	nushell.enable = true;
-	omnisharp.enable = true;
+        # bicep.enable = true;
+        dotls.enable = true;
+        fsautocomplete.enable = true;
+        nixd.enable = true;
+        nixd.settings = {
+          formatting.command = [ "nixfmt" ];
+          nixpkgs.expr = "import (builtins.getFlake \"/Users/ed/dev/nix/main-flake\").inputs.nixpkgs { }";
+          # nixpkgs.expr = "import <nixpkgs> { }";
+          options = {
+            nixos.expr = ''(builtins.getFlake "/Users/ed/dev/nix/main-flake").outputs.nixosConfigurations.nixos.options'';
+            nix-darwin.expr = ''(builtins.getFlake "/Users/ed/dev/nix/main-flake").outputs.darwinConfigurations.Ed-MBP16.options'';
+            home-manager.expr = ''(builtins.getFlake "/Users/ed/dev/nix/main-flake").outputs.homeConfigurations.ed.options'';
+            nixvim.expr = ''(builtins.getFlake "${self}").packages.${system}.neovimNixvim.options'';
+          };
+        };
+        nushell.enable = true;
+        omnisharp.enable = true;
       };
     };
     lualine.enable = true;
