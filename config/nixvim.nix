@@ -1,6 +1,5 @@
-{ pkgs, inputs, system, ... }:
-{
-  nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
+{ pkgs, inputs, system, ...  }:
+{ nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
   nixpkgs.config.permittedInsecurePackages = [
     "dotnet-core-combined"
     "dotnet-sdk-6.0.428"
@@ -25,17 +24,11 @@
           mode = "n";
           key = "<leader>${key}";
           action = "<cmd>${action}<CR>";
-          options = {
-            silent = true;
-            desc = desc;
-          };
+          options = { silent = true; desc = desc; };
         };
       in
       [
-        {
-          key = ";";
-          action = ":";
-        }
+        { key = ";"; action = ":"; }
         (leader "?" "WhichKey" "Show Keymaps")
         (leader "bb" "Telescope buffers" "List Buffers")
         (leader "bc" "b#" "Change Buffer")
@@ -68,15 +61,9 @@
           keymap = {
             preset = "enter";
             "<S-l>" = [ "select_and_accept" ];
-            "<S-j>" = [
-              "select_next"
-              "fallback"
-            ];
+            "<S-j>" = [ "select_next" "fallback" ];
             "<S-h>" = [ "hide" ];
-            "<S-k>" = [
-              "select_prev"
-              "fallback"
-            ];
+            "<S-k>" = [ "select_prev" "fallback" ];
           };
           nerd_font_variant = "mono";
           trigger.signature_help.enabled = true;
@@ -105,7 +92,7 @@
               nixos.expr = ''(builtins.getFlake "/Users/ed/dev/nix/main-flake").outputs.nixosConfigurations.nixos.options'';
               nix-darwin.expr = ''(builtins.getFlake "/Users/ed/dev/nix/main-flake").outputs.darwinConfigurations.Ed-MBP16.options'';
               home-manager.expr = ''(builtins.getFlake "/Users/ed/dev/nix/main-flake").outputs.homeConfigurations.ed.options'';
-	      nixvim.expr = ''(builtins.getFlake "/Users/ed/dev/nix/main-flake").packages.${system}.neovimNixvim.options'';
+              nixvim.expr = ''(builtins.getFlake "/Users/ed/dev/nix/main-flake").packages.${system}.neovimNixvim.options'';
             };
           };
         };
