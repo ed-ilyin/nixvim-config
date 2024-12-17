@@ -2,7 +2,7 @@
 {
   clipboard.register = "unnamedplus";
   colorschemes.catppuccin.enable = true;
-  # defaultEditor = true;
+  defaultEditor = true;
   editorconfig.enable = true;
   extraPlugins = [ pkgs.vimPlugins.vim-startuptime ];
   globals = {
