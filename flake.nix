@@ -20,17 +20,17 @@
     };
   };
 
-  outputs = { self, nixpkgs, nixvim, flake-parts, ... }@inputs:
+  outputs =
+    { self, nixpkgs, nixvim, flake-parts, ...  }@inputs:
     flake-parts.lib.mkFlake { inherit inputs; } {
       systems = [ "x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin" ];
-
       perSystem =
         { system, ... }:
         let
           pkgs = import nixpkgs {
-	    inherit system;
+            inherit system;
             config = {
-	      nix.nixPath = [ "nixpkgs=${nixpkgs}" ];
+              nix.nixPath = [ "nixpkgs=${nixpkgs}" ];
               permittedInsecurePackages = [
                 "dotnet-core-combined"
                 "dotnet-sdk-6.0.428"
@@ -46,8 +46,8 @@
             module = import ./config; # import the module directly
             # You can use `extraSpecialArgs` to pass additional arguments to your module files
             extraSpecialArgs = {
-	      inherit self;
-	      inherit system;
+              inherit self;
+              inherit system;
               # inherit (inputs) foo;
             };
           };
