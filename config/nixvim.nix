@@ -90,6 +90,7 @@
         };
         nushell.enable = true;
         omnisharp.enable = true;
+        terraformls.enable = true;
       };
     };
     lualine.enable = true;
