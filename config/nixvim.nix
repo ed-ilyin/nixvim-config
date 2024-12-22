@@ -73,7 +73,7 @@
     lsp = {
       enable = true;
       servers = {
-        azure_pipelines_ls.enable = true;
+        # azure_pipelines_ls.enable = true;
         # bicep.enable = true;
         dotls.enable = true;
         fsautocomplete.enable = true;
