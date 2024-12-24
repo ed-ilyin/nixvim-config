@@ -38,6 +38,7 @@
       (leader "?" "WhichKey" "Show Keymaps")
     ];
   opts = {
+    autoread = true;
     number = true;
     relativenumber = true;
     shiftwidth = 2;
