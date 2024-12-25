@@ -28,7 +28,7 @@
       (leader "fs" "w" "Save File")
       (leader "fm" "lua vim.lsp.buf.format()" "Format")
       (leader "ff" "Telescope find_files" "Find files")
-      (leader "fb" "Telescope file-browser" "File browser")
+      (leader "fb" "Telescope file_browser" "File browser")
       (leader "bp" "bp" "Previous Buffer")
       (leader "bn" "bn" "Next Buffer")
       (leader "bd" "bd" "Close Buffer")
