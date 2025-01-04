@@ -92,6 +92,7 @@
         };
         nushell.enable = true;
         omnisharp.enable = true;
+        sqls.enable = true;
         terraformls.enable = true;
       };
     };
